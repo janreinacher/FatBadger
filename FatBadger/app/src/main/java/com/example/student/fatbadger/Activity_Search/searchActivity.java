@@ -42,15 +42,15 @@ public class searchActivity extends AppCompatActivity {
     }
 
 
-   // Map<String, String> params = new HashMap<>();
+    Map<String, String> params = new HashMap<>();
 
-// general params
-   // params.put("term", "food");
-    //params.put("limit", "3");
+    {
+        // general params
+        params.put("term", "food");
+        params.put("limit", "3");
+    }
 
-// locale params
-   // params.put("lang", "fr");
 
-   // Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
+   Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
 
 }
