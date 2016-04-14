@@ -30,27 +30,28 @@ public class searchActivity extends AppCompatActivity {
     private RecyclerView RestaurantRecyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         apiFactory = new YelpAPIFactory("b9XjaVT2lGL8Z2lh2qzvpg", "XLGu0hiT-F-Vtz2cUMXnxDzM1rw", "XqGF2hUZXeNbZn8Vcx1cmpHtAHoLDKB-", "hxtwtRh3uaQN9kFos-n7_x3W5m4");
         yelpAPI = apiFactory.createAPI();
-        searchText = (EditText)findViewById(R.id.searchText);
-        searchButton= (Button)findViewById(R.id.searchButton);
-        RestaurantRecyclerView = (RecyclerView)findViewById(R.id.RestaurantRecyclerView);
+        searchText = (EditText) findViewById(R.id.searchText);
+        searchButton = (Button) findViewById(R.id.searchButton);
+        RestaurantRecyclerView = (RecyclerView) findViewById(R.id.RestaurantRecyclerView);
     }
 
 
-   // Map<String, String> params = new HashMap<>();
+    Map<String, String> params = new HashMap<>(); {
 
 // general params
-   // params.put("term", "food");
-    //params.put("limit", "3");
+    params.put("term", "food");
+    params.put("limit", "3");
 
 // locale params
-   // params.put("lang", "fr");
+    params.put("lang", "fr");
 
-   // Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
+     Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
+    }
 
 }
