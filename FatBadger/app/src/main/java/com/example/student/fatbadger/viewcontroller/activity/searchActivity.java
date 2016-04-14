@@ -1,14 +1,13 @@
-package com.example.student.fatbadger.Activity_Search;
+package com.example.student.fatbadger.viewcontroller.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.student.fatbadger.R;
+import com.example.student.fatbadger.viewcontroller.AppDefines;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.SearchResponse;
@@ -34,7 +33,8 @@ public class searchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        apiFactory = new YelpAPIFactory("b9XjaVT2lGL8Z2lh2qzvpg", "XLGu0hiT-F-Vtz2cUMXnxDzM1rw", "XqGF2hUZXeNbZn8Vcx1cmpHtAHoLDKB-", "hxtwtRh3uaQN9kFos-n7_x3W5m4");
+        // YelpAPIFactory(String consumerKey, String consumerSecret, String token, String tokenSecret)
+        apiFactory = new YelpAPIFactory(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET, AppDefines.TOKEN, AppDefines.TOKEN_SECRET);
         yelpAPI = apiFactory.createAPI();
         searchText = (EditText)findViewById(R.id.searchText);
         searchButton= (Button)findViewById(R.id.searchButton);
@@ -42,15 +42,13 @@ public class searchActivity extends AppCompatActivity {
     }
 
 
-   // Map<String, String> params = new HashMap<>();
+    Map<String, String> params = new HashMap<>();
+    {
+        // general params
+        params.put("term", "food");
+        params.put("limit", "3");
+    }
 
-// general params
-   // params.put("term", "food");
-    //params.put("limit", "3");
-
-// locale params
-   // params.put("lang", "fr");
-
-   // Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
+    Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
 
 }
