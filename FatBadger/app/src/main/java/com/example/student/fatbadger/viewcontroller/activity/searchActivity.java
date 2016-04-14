@@ -19,17 +19,10 @@ import retrofit.Call;
  * Created by The Janitor on 4/5/16.
  */
 public class searchActivity extends AppCompatActivity {
-    private EditText searchText;
-    private Button searchButton;
-    private RecyclerView RestaurantRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        searchText = (EditText)findViewById(R.id.searchText);
-        searchButton= (Button)findViewById(R.id.searchButton);
-        RestaurantRecyclerView = (RecyclerView)findViewById(R.id.RestaurantRecyclerView);
     }
 }
