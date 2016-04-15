@@ -25,22 +25,17 @@ public class ApiClient {
         return instance;
     }
 
-    // YelpAPIFactory(String consumerKey, String consumerSecret, String token, String tokenSecret)
     private YelpAPIFactory apiFactory;
     private YelpAPI yelpAPI;
 
-    public String getUrl() throws IOException {
+    public void CreateAPI() {
+
         apiFactory = new YelpAPIFactory(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET, AppDefines.TOKEN, AppDefines.TOKEN_SECRET);
         yelpAPI = apiFactory.createAPI();
-        Map<String, String> params = new HashMap<>();
-        {
-            // general params
-            params.put("term", "food");
-            params.put("limit", "20");
-        }
-        Call<SearchResponse> call = yelpAPI.search("San Francisco", params);
-        retrofit.Response<SearchResponse> response = call.execute();
-        String url = response.body().toString();
-        return url;
+    }
+
+    public Call<SearchResponse> call(Map<String, String> params, String searchString) {
+
+        return yelpAPI.search(searchString, params);
     }
 }

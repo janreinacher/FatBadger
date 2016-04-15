@@ -13,23 +13,23 @@ import com.example.student.fatbadger.utility.Parser;
  */
 public class SearchTask extends AsyncTask<String,String,SearchResultsModel> {
 
-    private CallbackListener callBackListener;
+    private CallbackListener callbackListener;
     public SearchTask (final CallbackListener callBackListener) {
-        this.callBackListener = callBackListener;
+        this.callbackListener = callBackListener;
     }
 
     @Override
     protected SearchResultsModel doInBackground(String... params) {
+
         HttpRequestManager httpRequestManager = new HttpRequestManager();
         String response = "";
+
         try {
-            response = httpRequestManager.getResults(ApiClient.getInstance().getUrl());
+            response = httpRequestManager.getResults("San Francisco");  // hard coded for SF for now
         } catch (IOException exception) {
             String exceptionString = exception.getMessage();
         }
 
         return Parser.parseFromJson(response);
     }
-
-
 }

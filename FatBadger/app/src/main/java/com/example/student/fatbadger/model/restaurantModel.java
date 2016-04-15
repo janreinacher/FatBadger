@@ -3,7 +3,7 @@ package com.example.student.fatbadger.model;
 /**
  * Created by student on 4/13/16.
  */
-public class restaurantModel {
+public class RestaurantModel {
     private String name;
     private String display_phone;
     private Double rating;

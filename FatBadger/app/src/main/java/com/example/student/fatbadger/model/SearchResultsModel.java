@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class SearchResultsModel {
     @SerializedName("businesses")
-    ArrayList<restaurantModel> searchResults;
+    ArrayList<RestaurantModel> searchResults;
 
-    public ArrayList<restaurantModel> getSearchResults() {
+    public ArrayList<RestaurantModel> getSearchResults() {
         return searchResults;
     }
 }
