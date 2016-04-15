@@ -1,4 +1,4 @@
-package com.example.student.fatbadger.Restaurant_Model;
+package com.example.student.fatbadger.model;
 
 /**
  * Created by student on 4/13/16.

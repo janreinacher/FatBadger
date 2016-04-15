@@ -14,7 +14,7 @@ import java.net.URL;
 public class HttpRequestManager {
     private final String GET = "GET";
 
-    public String getUrl(String urlString) throws IOException {
+    public String getResults(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection httpClient = (HttpURLConnection)url.openConnection();
         httpClient.setRequestMethod(GET);

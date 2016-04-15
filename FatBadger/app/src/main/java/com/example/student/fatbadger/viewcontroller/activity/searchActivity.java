@@ -9,8 +9,7 @@ import android.widget.EditText;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.viewcontroller.AppDefines;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 import retrofit.Call;
 
