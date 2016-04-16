@@ -1,6 +1,6 @@
 package com.example.student.fatbadger.listener;
 
-import com.example.student.fatbadger.Restaurant_Model.SearchResultsModel;
+import com.example.student.fatbadger.model.SearchResultsModel;
 
 /**
  * A simple interface to allow implementation of a Listener pattern for managing notification

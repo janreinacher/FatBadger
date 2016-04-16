@@ -1,9 +1,11 @@
-package com.example.student.fatbadger.Restaurant_Model;
+package com.example.student.fatbadger.model;
+
+import java.io.Serializable;
 
 /**
  * Created by student on 4/13/16.
  */
-public class restaurantModel {
+public class RestaurantModel implements Serializable {
     private String name;
     private String display_phone;
     private Double rating;
@@ -11,6 +13,16 @@ public class restaurantModel {
     private String city;
     private String state;
     private Boolean is_closed;
+    private String img_url;
+    private String details;
+
+    public String getDetails() {return details;}
+
+    public void setDetails(String details) {this.details = details;}
+
+    public String getImg_url() { return img_url; }
+
+    public void setImg_url(String img_url) { this.img_url = img_url; }
 
     public String getState() { return state; }
 

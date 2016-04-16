@@ -1,4 +1,4 @@
-package com.example.student.fatbadger.Restaurant_Model;
+package com.example.student.fatbadger.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,11 +7,11 @@ import java.util.ArrayList;
 /**
  * Created by student on 4/13/16.
  */
-public class searchResultsModel {
+public class SearchResultsModel {
     @SerializedName("businesses")
-    ArrayList<restaurantModel> searchResults;
+    ArrayList<RestaurantModel> searchResults;
 
-    public ArrayList<restaurantModel> getSearchResults() {
+    public ArrayList<RestaurantModel> getSearchResults() {
         return searchResults;
     }
 }
