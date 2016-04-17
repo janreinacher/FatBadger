@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
+import com.example.student.fatbadger.model.SearchResultsModel;
+import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
 import com.example.student.fatbadger.service.api.ApiClient;
 
@@ -63,15 +65,45 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApiClient.getInstance().CreateAPI();
 
+                ApiClient.getInstance().CreateAPI();
                 try {
-                    String url = ApiClient.getInstance().getUrl(searchText.getText().toString());
+                    String json = ApiClient.getInstance().getJson(searchText.getText().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+                ApiClient.getInstance().getRestaurantApiAdapter()
+                        .getSearchResults()
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<SearchResultsModel>() {
+                            @Override
+                            public void onCompleted() {
 
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(SearchResultsModel searchResultsModel) {
+                                adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
+                                adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
+                                    @Override
+                                    public void onSelected(RestaurantModel item) {
+                                        if (onFragmentEvent != null) {
+                                            onFragmentEvent.onEvent(item);
+                                        }
+                                    }
+                                });
+
+                                restaurantRecyclerView.setLayoutManager(layoutManager);
+                                restaurantRecyclerView.setAdapter(adapter);
+                            }
+                        });
             }
         });
     return  view;

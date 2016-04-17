@@ -5,7 +5,11 @@ import com.example.student.fatbadger.viewcontroller.AppDefines;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
 import com.yelp.clientlib.entities.SearchResponse;
+import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +34,18 @@ public class ApiClient {
     private YelpAPIFactory apiFactory;
     private YelpAPI yelpAPI;
 
+    public RestaurantApiAdapter getRestaurantApiAdapter() {
+        CreateAPI();
+        RestaurantApiAdapter api = new Retrofit.Builder()
+                .baseUrl(AppDefines.BASE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build()
+                .create(RestaurantApiAdapter.class);
+
+        return api;
+    }
+
     public void CreateAPI() {
         params = new HashMap<>();
         {
@@ -41,7 +57,7 @@ public class ApiClient {
         yelpAPI = apiFactory.createAPI();
     }
 
-    public String getUrl(String searchString) throws IOException {
+    public String getJson(String searchString) throws IOException {
 
         Call<SearchResponse> call = yelpAPI.search(searchString, params);
         retrofit.Response<SearchResponse> response = call.execute();

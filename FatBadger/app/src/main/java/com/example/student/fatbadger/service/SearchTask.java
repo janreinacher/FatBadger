@@ -25,7 +25,7 @@ public class SearchTask extends AsyncTask<String,String,SearchResultsModel> {
     protected SearchResultsModel doInBackground(String... params) {
         String response = "";
         try {
-            response = ApiClient.getInstance().getUrl(params[0]);
+            response = ApiClient.getInstance().getJson(params[0]);
         } catch (IOException exception) {
             String exceptionString = exception.getMessage();
         }
