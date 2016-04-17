@@ -27,7 +27,8 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"/>
+            android:text="Search"
+            android:background="#3380ec" />
     </LinearLayout>
 
     <GridLayout
@@ -48,7 +49,7 @@
             android:layout_margin="10dp"
             android:text="Favorites"
             android:layout_gravity="left|center_vertical"
-            android:background="#43f66d" />
+            android:background="#57e727" />
 
         <Button
             android:id="@+id/recents"
@@ -56,6 +57,24 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Recent"
-            android:layout_gravity="right|center_horizontal"/>
+            android:layout_gravity="center_vertical|right"
+            android:background="#57e727" />
+        <Button
+            android:id="@+id/convenience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convenience"
+            android:layout_gravity="left|center_vertical"
+            android:background="#57e727"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="10dp"
+            android:background="#57e727"
+            />
     </GridLayout>
 </FrameLayout>
