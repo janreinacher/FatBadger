@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Created by student on 4/13/16.
  */
-public class RestaurantModel implements Serializable {
+public class
+        RestaurantModel implements Serializable {
     private String name;
     private String display_phone;
     private Double rating;

@@ -14,6 +14,14 @@ import android.widget.EditText;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
+import com.example.student.fatbadger.service.api.ApiClient;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Shay on 4/13/16.
@@ -52,12 +60,20 @@ public class SearchFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-    searchButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiClient.getInstance().CreateAPI();
 
-        }
-    });
+                try {
+                    String url = ApiClient.getInstance().getUrl(searchText.getText().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
     return  view;
     }
 

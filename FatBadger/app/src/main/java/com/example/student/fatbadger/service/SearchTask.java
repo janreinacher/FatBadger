@@ -4,8 +4,11 @@ import android.os.AsyncTask;
 
 import com.example.student.fatbadger.listener.CallbackListener;
 import com.example.student.fatbadger.model.SearchResultsModel;
-import com.example.student.fatbadger.utility.YelpParser;
-import com.example.student.fatbadger.utility.UrlFormatUtility;
+import com.example.student.fatbadger.utility.yelpParser;
+import com.example.student.fatbadger.service.api.ApiClient;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,14 +23,20 @@ public class SearchTask extends AsyncTask<String,String,SearchResultsModel> {
 
     @Override
     protected SearchResultsModel doInBackground(String... params) {
-        HttpRequestManager httpRequestManager = new HttpRequestManager();
         String response = "";
         try {
-            response = httpRequestManager.getUrl(UrlFormatUtility.formatSearchString(params[0]));
+            response = ApiClient.getInstance().getUrl(params[0]);
         } catch (IOException exception) {
             String exceptionString = exception.getMessage();
         }
 
-        return YelpParser.parseFromJson(response);
+        return yelpParser.parseRecipeFromJson(response);
+    }
+
+    @Override
+    protected void onPostExecute(SearchResultsModel searchResultsModel) {
+        super.onPostExecute(searchResultsModel);
+        // Invoke the local listener which has a referece to the concretely implemented listener in SearchActivity
+        callBackListener.onSearchCallback(searchResultsModel);
     }
 }

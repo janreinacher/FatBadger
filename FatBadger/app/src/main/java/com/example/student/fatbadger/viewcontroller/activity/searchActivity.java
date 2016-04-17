@@ -12,7 +12,7 @@ import com.example.student.fatbadger.viewcontroller.fragment.RestaurantFragment;
 /**
  * Created by The Janitor on 4/5/16.
  */
-public class SearchActivity extends AppCompatActivity {
+public class searchActivity extends AppCompatActivity {
     private SearchFragment searchFragment;
     private  RestaurantFragment restaurantFragment;
     @Override
