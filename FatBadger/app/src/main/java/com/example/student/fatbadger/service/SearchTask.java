@@ -4,11 +4,8 @@ import android.os.AsyncTask;
 
 import com.example.student.fatbadger.listener.CallbackListener;
 import com.example.student.fatbadger.model.SearchResultsModel;
-import com.example.student.fatbadger.utility.yelpParser;
 import com.example.student.fatbadger.service.api.ApiClient;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**

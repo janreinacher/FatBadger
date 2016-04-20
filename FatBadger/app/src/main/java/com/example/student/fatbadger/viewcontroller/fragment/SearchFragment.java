@@ -13,17 +13,19 @@ import android.widget.EditText;
 
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
+import com.example.student.fatbadger.
 import com.example.student.fatbadger.model.SearchResultsModel;
 import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
 import com.example.student.fatbadger.service.api.ApiClient;
+import com.yelp.clientlib.entities.SearchResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+//import rx.Observer;
+//import rx.android.schedulers.AndroidSchedulers;
+//import rx.schedulers.Schedulers;
 
 /**
  * Created by Shay on 4/13/16.
@@ -66,13 +68,19 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                SearchResponse searchResponse;
                 ApiClient.getInstance().CreateAPI();
                 try {
-                    String json = ApiClient.getInstance().getJson(searchText.getText().toString());
+                    searchResponse = ApiClient.getInstance().getSearchResponse(searchText.getText().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+                // Need to put data into a SearchResultsModel
+                // Requires the implementation of yelp android entities and support files
+                SearchResultsModel searchResultsModel;
+
+                /*
                 ApiClient.getInstance().getRestaurantApiAdapter()
                         .getSearchResults()
                         .subscribeOn(Schedulers.newThread())
@@ -104,6 +112,7 @@ public class SearchFragment extends Fragment {
                                 restaurantRecyclerView.setAdapter(adapter);
                             }
                         });
+                        */
             }
         });
     return  view;

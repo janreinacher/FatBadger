@@ -1,6 +1,6 @@
 package com.example.student.fatbadger.model;
 
-import com.google.gson.annotations.SerializedName;
+//import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by student on 4/13/16.
  */
 public class SearchResultsModel {
-    @SerializedName("businesses")
+    //@SerializedName("businesses")
     ArrayList<RestaurantModel> searchResults;
 
     public ArrayList<RestaurantModel> getSearchResults() {
