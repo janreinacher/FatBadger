@@ -13,12 +13,12 @@ import android.widget.EditText;
 
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
-import com.example.student.fatbadger.
 import com.example.student.fatbadger.model.SearchResultsModel;
 import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
 import com.example.student.fatbadger.service.api.ApiClient;
 import com.yelp.clientlib.entities.SearchResponse;
+import com.yelp.clientlib.entities.Business;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,7 +56,8 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         searchText = (EditText) view.findViewById(R.id.searchText);
         searchButton = (Button) view.findViewById(R.id.searchButton);
@@ -68,19 +69,46 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                SearchResponse searchResponse;
-                ApiClient.getInstance().CreateAPI();
+                SearchResponse searchResponse = null;
                 try {
                     searchResponse = ApiClient.getInstance().getSearchResponse(searchText.getText().toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                if (searchResponse != null) {
+                    adapter = new RestaurantAdapter(searchResponse.businesses());
+                    adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
+                        @Override
+                        public void onSelected(Business item) {
+                            if (onFragmentEvent != null) {
+                                onFragmentEvent.onEvent(item);
+                            }
+                        }
+                    });
+                    restaurantRecyclerView.setLayoutManager(layoutManager);
+                    restaurantRecyclerView.setAdapter(adapter);
+                }
+                // previous commented code at the bottom of this page
+            }
+        });
+    return  view;
+    }
 
-                // Need to put data into a SearchResultsModel
-                // Requires the implementation of yelp android entities and support files
-                SearchResultsModel searchResultsModel;
+    @Override
+    public void onAttach(Context context) {super.onAttach(context);}
 
-                /*
+    @Override
+    public void onDetach() {super.onDetach();}
+
+    public void setOnFragmentEvent(OnFragmentEvent onFragmentEvent) {
+        this.onFragmentEvent = onFragmentEvent;
+    }
+
+    public interface OnFragmentEvent {
+        void onEvent(Business itemModel);
+    }
+}
+/*
                 ApiClient.getInstance().getRestaurantApiAdapter()
                         .getSearchResults()
                         .subscribeOn(Schedulers.newThread())
@@ -113,22 +141,3 @@ public class SearchFragment extends Fragment {
                             }
                         });
                         */
-            }
-        });
-    return  view;
-    }
-
-    @Override
-    public void onAttach(Context context) {super.onAttach(context);}
-
-    @Override
-    public void onDetach() {super.onDetach();}
-
-    public void setOnFragmentEvent(OnFragmentEvent onFragmentEvent) {
-        this.onFragmentEvent = onFragmentEvent;
-    }
-
-    public interface OnFragmentEvent {
-        void onEvent(RestaurantModel itemModel);
-    }
-}

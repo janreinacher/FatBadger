@@ -3,37 +3,37 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.yelp.clientlib.entities.Business;
 
 import java.util.ArrayList;
 import com.example.student.fatbadger.R;
-import com.example.student.fatbadger.model.RestaurantModel;
 
 /**
  * Created by student on 4/16/16.
  */
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantItemViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<BusinessViewHolder> {
 
-    private ArrayList<RestaurantModel> restaurantItemCollection;
+    private ArrayList<Business> businesses;
     private OnItemSelected onItemSelected;
 
-    public RestaurantAdapter (ArrayList<RestaurantModel> restaurantItemCollection){
-        this.restaurantItemCollection = restaurantItemCollection;
+    public RestaurantAdapter (ArrayList<Business> businesses){
+        this.businesses = businesses;
     }
 
     @Override
-    public RestaurantItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BusinessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_detail, parent, false);
 
-        return new RestaurantItemViewHolder(view);
+        return new BusinessViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder (RestaurantItemViewHolder holder, int position){
-        RestaurantModel item = restaurantItemCollection.get(position);
-        holder.setOnRestaurantItemClicked(new RestaurantItemViewHolder.OnRestaurantItemClicked(){
+    public void onBindViewHolder (BusinessViewHolder holder, int position){
+        Business item = businesses.get(position);
+        holder.setOnBusinessClicked(new BusinessViewHolder.OnBusinessClicked() {
             @Override
-            public void onClick(RestaurantModel item){
-                if (onItemSelected != null){
+            public void onClick(Business item) {
+                if (onItemSelected != null) {
                     onItemSelected.onSelected(item);
                 }
             }
@@ -42,15 +42,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantItemViewHo
     }
 
     @Override
-    public final void onViewRecycled(final RestaurantItemViewHolder holder) {
+    public final void onViewRecycled(final BusinessViewHolder holder) {
         super.onViewRecycled(holder);
-        holder.setOnRestaurantItemClicked(null);
+        holder.setOnBusinessClicked(null);
         holder.unbind();
     }
 
     @Override
     public int getItemCount() {
-        return restaurantItemCollection.size();
+        return businesses.size();
     }
 
     public void setOnItemSelected (OnItemSelected onItemSelected) {
@@ -58,6 +58,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantItemViewHo
     }
 
     public interface OnItemSelected {
-        void onSelected(RestaurantModel item);
+        void onSelected(Business item);
     }
 }

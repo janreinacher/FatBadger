@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.student.fatbadger.R;
-import com.example.student.fatbadger.model.RestaurantModel;
 import com.example.student.fatbadger.viewcontroller.fragment.SearchFragment;
 import com.example.student.fatbadger.viewcontroller.fragment.RestaurantFragment;
+import com.yelp.clientlib.entities.Business;
 
 
 /**
@@ -23,7 +23,7 @@ public class searchActivity extends AppCompatActivity {
         searchFragment = SearchFragment.newInstance();
         searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
             @Override
-            public void onEvent(RestaurantModel restaurantModel) {
+            public void onEvent(Business restaurantModel) {
                 restaurantFragment = RestaurantFragment.newInstance(restaurantModel);
 
                 getSupportFragmentManager().beginTransaction()

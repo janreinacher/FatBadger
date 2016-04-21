@@ -17,23 +17,24 @@ import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
 
 import com.example.student.fatbadger.model.RestaurantModel;
+import com.yelp.clientlib.entities.Business;
 
 public class RestaurantFragment extends Fragment {
-    private RestaurantModel restaurant;
-    private static final String Restaurant = "restaurant";
+    private Business business;
+    private static final String Business = "business";
 
-    private ImageView restaurantDetailThumbnail;
-    private TextView restaurantDetailName;
+    private ImageView detailThumbnail;
+    private TextView detailName;
     private ListView details;
 
     public RestaurantFragment() {
 
     }
 
-    public static RestaurantFragment newInstance(RestaurantModel restaurant) {
+    public static RestaurantFragment newInstance(Business business) {
         RestaurantFragment fragment = new RestaurantFragment();
         Bundle args = new Bundle();
-        args.putSerializable(Restaurant, restaurant);
+        args.putSerializable(Business, business);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,21 +44,21 @@ public class RestaurantFragment extends Fragment {
         super.onCreate(savedInstancesState);
 
         if( getArguments() != null)
-            restaurant = (RestaurantModel)getArguments().getSerializable(Restaurant);
+            business = (Business)getArguments().getSerializable(Business);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
-        restaurantDetailThumbnail = (ImageView)view.findViewById(R.id.restaurantDetailThumbnail);
-        restaurantDetailName = (TextView)view.findViewById(R.id.restaurantDetailName);
+        detailThumbnail = (ImageView)view.findViewById(R.id.restaurantDetailThumbnail);
+        detailName = (TextView)view.findViewById(R.id.restaurantDetailName);
         details = (ListView)view.findViewById(R.id.description);
 
-        Glide.with(this).load(restaurant.getImg_url())
-                .into(restaurantDetailThumbnail);
+        Glide.with(this).load(business.imageUrl())
+                .into(detailThumbnail);
 
-        restaurantDetailName.setText(restaurant.getName());
+        detailName.setText(business.name());
 
         // details.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, restaurant.getDetails()));
 

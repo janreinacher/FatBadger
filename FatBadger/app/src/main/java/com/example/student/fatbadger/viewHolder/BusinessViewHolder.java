@@ -7,37 +7,38 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
+import com.yelp.clientlib.entities.Business;
 
 /**
  * Created by student on 4/16/16.
  */
-public class RestaurantItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class BusinessViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private ImageView restaurantThumbnail;
-    private TextView restaurantName;
-    private RestaurantModel item;
-    private OnRestaurantItemClicked onRestaurantItemClicked;
+    private ImageView thumbnail;
+    private TextView name;
+    private Business item;
+    private OnBusinessClicked onBusinessClicked;
 
-    public RestaurantItemViewHolder(final View itemView) { super(itemView); }
+    public BusinessViewHolder(final View itemView) { super(itemView); }
 
     // A method to bring an itemModel to the layout
-    public final void bind(final RestaurantModel item) {
+    public final void bind(final Business item) {
         // assign layout instances to local versions
         this.item = item;
-        restaurantThumbnail = (ImageView)itemView.findViewById(R.id.restaurantThumbnail);
-        restaurantName = (TextView)itemView.findViewById(R.id.restaurantName);
+        thumbnail = (ImageView)itemView.findViewById(R.id.restaurantThumbnail);
+        name = (TextView)itemView.findViewById(R.id.restaurantName);
 
         // Use the Glide library to preload an image for the thumbnail
         Glide.with(itemView.getContext())
-                .load(item.getImg_url())
-                .into(restaurantThumbnail);
+                .load(item.imageUrl())
+                .into(thumbnail);
 
         // Set the value of the name
-        restaurantName.setText(item.getName());
+        name.setText(item.name());
 
         // Adding click listeners on the image and text of the RecyclerView items for touch events
-        restaurantName.setOnClickListener(this);
-        restaurantThumbnail.setOnClickListener(this);
+        name.setOnClickListener(this);
+        thumbnail.setOnClickListener(this);
 
     }
 
@@ -47,20 +48,20 @@ public class RestaurantItemViewHolder extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClick(View v) {
-        if(onRestaurantItemClicked != null) {
-            onRestaurantItemClicked.onClick(item);
+        if(onBusinessClicked != null) {
+            onBusinessClicked.onClick(item);
         }
     }
 
     // The setter that allows other classes to create a reference to the listener
-    public void setOnRestaurantItemClicked(OnRestaurantItemClicked onRestaurantItemClicked) {
-        this.onRestaurantItemClicked = onRestaurantItemClicked;
+    public void setOnBusinessClicked(OnBusinessClicked onBusinessClicked) {
+        this.onBusinessClicked = onBusinessClicked;
     }
 
     // An interface is added as an internal impolementation in our ViewHolder. This will allow
     // classes that instantiate a new instance of this ViewHolder to subscribe to this interface
     // and listen for events.
-    public interface OnRestaurantItemClicked {
-        void onClick(RestaurantModel item);
+    public interface OnBusinessClicked {
+        void onClick(Business item);
     }
 }
