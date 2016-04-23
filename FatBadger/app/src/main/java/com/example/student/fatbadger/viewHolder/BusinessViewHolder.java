@@ -7,22 +7,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
-import com.yelp.clientlib.entities.Business;
+//import com.yelp.clientlib.entities.Business;
 
 /**
- * Created by student on 4/16/16.
+ * Created by Jack on 4/16/16.
  */
 public class BusinessViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ImageView thumbnail;
     private TextView name;
-    private Business item;
+    private RestaurantModel item;
     private OnBusinessClicked onBusinessClicked;
 
     public BusinessViewHolder(final View itemView) { super(itemView); }
 
     // A method to bring an itemModel to the layout
-    public final void bind(final Business item) {
+    public final void bind(final RestaurantModel item) {
         // assign layout instances to local versions
         this.item = item;
         thumbnail = (ImageView)itemView.findViewById(R.id.restaurantThumbnail);
@@ -30,11 +30,11 @@ public class BusinessViewHolder extends RecyclerView.ViewHolder implements View.
 
         // Use the Glide library to preload an image for the thumbnail
         Glide.with(itemView.getContext())
-                .load(item.imageUrl())
+                .load(item.getImg_url())
                 .into(thumbnail);
 
         // Set the value of the name
-        name.setText(item.name());
+        name.setText(item.getName());
 
         // Adding click listeners on the image and text of the RecyclerView items for touch events
         name.setOnClickListener(this);
@@ -62,6 +62,6 @@ public class BusinessViewHolder extends RecyclerView.ViewHolder implements View.
     // classes that instantiate a new instance of this ViewHolder to subscribe to this interface
     // and listen for events.
     public interface OnBusinessClicked {
-        void onClick(Business item);
+        void onClick(RestaurantModel item);
     }
 }

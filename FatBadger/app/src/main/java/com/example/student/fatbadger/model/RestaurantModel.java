@@ -14,16 +14,16 @@ public class
     private String city;
     private String state;
     private Boolean is_closed;
-    private String img_url;
+    private String image_url;
     private String details;
 
     public String getDetails() {return details;}
 
     public void setDetails(String details) {this.details = details;}
 
-    public String getImg_url() { return img_url; }
+    public String getImg_url() { return image_url; }
 
-    public void setImg_url(String img_url) { this.img_url = img_url; }
+    public void setImg_url(String img_url) { this.image_url = img_url; }
 
     public String getState() { return state; }
 

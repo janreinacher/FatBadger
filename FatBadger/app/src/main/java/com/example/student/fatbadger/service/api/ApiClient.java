@@ -2,18 +2,18 @@
 package com.example.student.fatbadger.service.api;
 
 import com.example.student.fatbadger.viewcontroller.AppDefines;
-import com.yelp.clientlib.connection.YelpAPI;
-import com.yelp.clientlib.connection.YelpAPIFactory;
-import com.yelp.clientlib.entities.SearchResponse;
+//import com.yelp.clientlib.connection.YelpAPI;
+//import com.yelp.clientlib.connection.YelpAPIFactory;
+//import com.yelp.clientlib.entities.SearchResponse;
 import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 
-//import retrofit2.Retrofit;
-//import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-//import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import retrofit.Call;
+//import retrofit.Call;
 
 /**
  * Created by student on 4/13/16.
@@ -31,12 +31,12 @@ public class ApiClient {
         return instance;
     }
 
-    private YelpAPIFactory apiFactory;
-    private YelpAPI yelpAPI;
+    //private YelpAPIFactory apiFactory;
+    //private YelpAPI yelpAPI;
 
-    /*
+
     public RestaurantApiAdapter getRestaurantApiAdapter() {
-        CreateAPI();
+        //CreateAPI();
         RestaurantApiAdapter api = new Retrofit.Builder()
                 .baseUrl(AppDefines.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -46,8 +46,8 @@ public class ApiClient {
 
         return api;
     }
-    */
 
+/*
     public void CreateAPI() {
         params = new HashMap<>();
         {
@@ -71,4 +71,5 @@ public class ApiClient {
     public void addParam(String key, String value) {
         params.put(key,value);
     }
+    */
 }

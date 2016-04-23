@@ -3,20 +3,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.yelp.clientlib.entities.Business;
+//import com.yelp.clientlib.entities.Business;
 
 import java.util.ArrayList;
 import com.example.student.fatbadger.R;
+import com.example.student.fatbadger.model.RestaurantModel;
 
 /**
  * Created by student on 4/16/16.
  */
 public class RestaurantAdapter extends RecyclerView.Adapter<BusinessViewHolder> {
 
-    private ArrayList<Business> businesses;
+    private ArrayList<RestaurantModel> businesses;
     private OnItemSelected onItemSelected;
 
-    public RestaurantAdapter (ArrayList<Business> businesses){
+    public RestaurantAdapter (ArrayList<RestaurantModel> businesses){
         this.businesses = businesses;
     }
 
@@ -29,10 +30,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<BusinessViewHolder> 
 
     @Override
     public void onBindViewHolder (BusinessViewHolder holder, int position){
-        Business item = businesses.get(position);
+        RestaurantModel item = businesses.get(position);
         holder.setOnBusinessClicked(new BusinessViewHolder.OnBusinessClicked() {
             @Override
-            public void onClick(Business item) {
+            public void onClick(RestaurantModel item) {
                 if (onItemSelected != null) {
                     onItemSelected.onSelected(item);
                 }
@@ -58,6 +59,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<BusinessViewHolder> 
     }
 
     public interface OnItemSelected {
-        void onSelected(Business item);
+        void onSelected(RestaurantModel item);
     }
 }
