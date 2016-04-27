@@ -14,15 +14,14 @@ import android.widget.EditText;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
 import com.example.student.fatbadger.model.SearchResultsModel;
-import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
 import com.example.student.fatbadger.service.api.ApiClient;
-import com.yelp.clientlib.entities.SearchResponse;
-import com.yelp.clientlib.entities.Business;
+import com.example.student.fatbadger.viewcontroller.AppDefines;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 //import rx.Observer;
 //import rx.android.schedulers.AndroidSchedulers;
 //import rx.schedulers.Schedulers;
@@ -69,26 +68,39 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                SearchResponse searchResponse = null;
-                try {
-                    searchResponse = ApiClient.getInstance().getSearchResponse(searchText.getText().toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (searchResponse != null) {
-                    adapter = new RestaurantAdapter(searchResponse.businesses());
-                    adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
-                        @Override
-                        public void onSelected(Business item) {
-                            if (onFragmentEvent != null) {
-                                onFragmentEvent.onEvent(item);
+                ApiClient.getInstance().getRestaurantApiAdapter()
+                        .getSearchResults(
+                                searchText.getText().toString()
+                        ).observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(new Subscriber<SearchResultsModel>() {
+                            @Override
+                            public void onCompleted() {
+
                             }
-                        }
-                    });
-                    restaurantRecyclerView.setLayoutManager(layoutManager);
-                    restaurantRecyclerView.setAdapter(adapter);
-                }
-                // previous commented code at the bottom of this page
+
+                            @Override
+                            public void onError(Throwable e) {
+                                int i = 0;
+                            }
+
+                            @Override
+                            public void onNext(SearchResultsModel searchResultsModel) {
+                                if (searchResultsModel != null) {
+                                    adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
+                                    adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
+                                        @Override
+                                        public void onSelected(RestaurantModel item) {
+                                            if (onFragmentEvent != null) {
+                                                onFragmentEvent.onEvent(item);
+                                            }
+                                        }
+                                    });
+                                    restaurantRecyclerView.setLayoutManager(layoutManager);
+                                    restaurantRecyclerView.setAdapter(adapter);
+                                }
+                            }
+                        });
             }
         });
     return  view;
@@ -105,39 +117,7 @@ public class SearchFragment extends Fragment {
     }
 
     public interface OnFragmentEvent {
-        void onEvent(Business itemModel);
+        void onEvent(RestaurantModel itemModel);
     }
 }
-/*
-                ApiClient.getInstance().getRestaurantApiAdapter()
-                        .getSearchResults()
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<SearchResultsModel>() {
-                            @Override
-                            public void onCompleted() {
 
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onNext(SearchResultsModel searchResultsModel) {
-                                adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
-                                adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
-                                    @Override
-                                    public void onSelected(RestaurantModel item) {
-                                        if (onFragmentEvent != null) {
-                                            onFragmentEvent.onEvent(item);
-                                        }
-                                    }
-                                });
-
-                                restaurantRecyclerView.setLayoutManager(layoutManager);
-                                restaurantRecyclerView.setAdapter(adapter);
-                            }
-                        });
-                        */

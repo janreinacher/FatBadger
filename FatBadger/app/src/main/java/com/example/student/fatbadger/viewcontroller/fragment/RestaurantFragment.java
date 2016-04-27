@@ -15,13 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
-
 import com.example.student.fatbadger.model.RestaurantModel;
-import com.yelp.clientlib.entities.Business;
+
 
 public class RestaurantFragment extends Fragment {
-    private Business business;
-    private static final String Business = "business";
+    private RestaurantModel model;
+    private static final String RESTAURANT = "restaurant";
 
     private ImageView detailThumbnail;
     private TextView detailName;
@@ -31,10 +30,10 @@ public class RestaurantFragment extends Fragment {
 
     }
 
-    public static RestaurantFragment newInstance(Business business) {
+    public static RestaurantFragment newInstance(RestaurantModel model) {
         RestaurantFragment fragment = new RestaurantFragment();
         Bundle args = new Bundle();
-        args.putSerializable(Business, business);
+        args.putSerializable(RESTAURANT, model);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +43,7 @@ public class RestaurantFragment extends Fragment {
         super.onCreate(savedInstancesState);
 
         if( getArguments() != null)
-            business = (Business)getArguments().getSerializable(Business);
+            model = (RestaurantModel)getArguments().getSerializable(RESTAURANT);
     }
 
     @Override
@@ -55,10 +54,10 @@ public class RestaurantFragment extends Fragment {
         detailName = (TextView)view.findViewById(R.id.restaurantDetailName);
         details = (ListView)view.findViewById(R.id.description);
 
-        Glide.with(this).load(business.imageUrl())
+        Glide.with(this).load(model.getImg_url())
                 .into(detailThumbnail);
 
-        detailName.setText(business.name());
+        detailName.setText(model.getName());
 
         // details.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, restaurant.getDetails()));
 

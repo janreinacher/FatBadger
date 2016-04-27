@@ -7,12 +7,15 @@ import com.example.student.fatbadger.viewcontroller.AppDefines;
 //import com.yelp.clientlib.entities.SearchResponse;
 import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
+import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 //import retrofit.Call;
 
 /**
@@ -37,10 +40,19 @@ public class ApiClient {
 
     public RestaurantApiAdapter getRestaurantApiAdapter() {
         //CreateAPI();
+
+        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET);
+        consumer.setTokenWithSecret(AppDefines.TOKEN, AppDefines.TOKEN_SECRET);
+
+        OkHttpClient client  = new OkHttpClient.Builder()
+                .addInterceptor(new SigningInterceptor(consumer))
+                .build();
+
         RestaurantApiAdapter api = new Retrofit.Builder()
                 .baseUrl(AppDefines.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
                 .build()
                 .create(RestaurantApiAdapter.class);
 

@@ -9,9 +9,5 @@ public interface RestaurantApiAdapter {
 
     @GET ("v2/search")
     Observable<SearchResultsModel> getSearchResults(
-        @Query("term_key") String term,
-        @Query("term_secret") String termSecret,
-        @Query("token") String token,
-        @Query("token_secret") String tokenSecret,
-        @Query("q") String searchString);
+        @Query("term") String searchString);
 }

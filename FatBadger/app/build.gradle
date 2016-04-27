@@ -48,5 +48,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
+    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
 
 }
