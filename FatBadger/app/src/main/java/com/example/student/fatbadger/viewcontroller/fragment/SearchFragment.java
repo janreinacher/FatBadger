@@ -70,7 +70,11 @@ public class SearchFragment extends Fragment {
 
                 ApiClient.getInstance().getRestaurantApiAdapter()
                         .getSearchResults(
-                                searchText.getText().toString()
+                                searchText.getText().toString(),
+                                AppDefines.CONSUMER_KEY,
+                                AppDefines.CONSUMER_SECRET,
+                                AppDefines.TOKEN,
+                                AppDefines.TOKEN_SECRET
                         ).observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(new Subscriber<SearchResultsModel>() {
