@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
@@ -19,6 +21,10 @@ import com.example.student.fatbadger.service.api.ApiClient;
 import com.example.student.fatbadger.viewcontroller.AppDefines;
 
 
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -53,6 +59,11 @@ public class SearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public Timestamp getTimestamp(){
+        java.util.Date date = new java.util.Date();
+        java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(date.getTime());
+        return currentTimestamp;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -68,43 +79,48 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ApiClient.getInstance().getRestaurantApiAdapter()
-                        .getSearchResults(
-                                searchText.getText().toString(),
-                                AppDefines.CONSUMER_KEY,
-                                AppDefines.CONSUMER_SECRET,
-                                AppDefines.TOKEN,
-                                AppDefines.TOKEN_SECRET
-                        ).observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.newThread())
-                        .subscribe(new Subscriber<SearchResultsModel>() {
-                            @Override
-                            public void onCompleted() {
+                    ApiClient.getInstance().getRestaurantApiAdapter()
+                            .getSearchResults(
+                                    searchText.getText().toString(),
+                                    AppDefines.CONSUMER_KEY,
+                                    AppDefines.CONSUMER_SECRET,
+                                    AppDefines.TOKEN,
+                                    AppDefines.TOKEN_SECRET,
+                                    AppDefines.SIGNATURE_METHOD,
+                                    AppDefines.SIGNATURE,
+                                    getTimestamp(),
+                                    AppDefines.NONCE
 
-                            }
+                                    ).subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Observer<SearchResultsModel>() {
+                                @Override
+                                public void onCompleted() {
 
-                            @Override
-                            public void onError(Throwable e) {
-                                int i = 0;
-                            }
-
-                            @Override
-                            public void onNext(SearchResultsModel searchResultsModel) {
-                                if (searchResultsModel != null) {
-                                    adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
-                                    adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
-                                        @Override
-                                        public void onSelected(RestaurantModel item) {
-                                            if (onFragmentEvent != null) {
-                                                onFragmentEvent.onEvent(item);
-                                            }
-                                        }
-                                    });
-                                    restaurantRecyclerView.setLayoutManager(layoutManager);
-                                    restaurantRecyclerView.setAdapter(adapter);
                                 }
-                            }
-                        });
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    int i = 0;
+                                }
+
+                                @Override
+                                public void onNext(SearchResultsModel searchResultsModel) {
+                                    if (searchResultsModel != null) {
+                                        adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
+                                        adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
+                                            @Override
+                                            public void onSelected(RestaurantModel item) {
+                                                if (onFragmentEvent != null) {
+                                                    onFragmentEvent.onEvent(item);
+                                                }
+                                            }
+                                        });
+                                        restaurantRecyclerView.setLayoutManager(layoutManager);
+                                        restaurantRecyclerView.setAdapter(adapter);
+                                    }
+                                }
+                            });
             }
         });
     return  view;

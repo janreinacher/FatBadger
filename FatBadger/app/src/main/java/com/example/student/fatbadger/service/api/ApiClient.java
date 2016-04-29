@@ -1,12 +1,17 @@
 
 package com.example.student.fatbadger.service.api;
 
+import android.util.Log;
+
 import com.example.student.fatbadger.viewcontroller.AppDefines;
 //import com.yelp.clientlib.connection.YelpAPI;
 //import com.yelp.clientlib.connection.YelpAPIFactory;
 //import com.yelp.clientlib.entities.SearchResponse;
 import com.example.student.fatbadger.service.adapter.RestaurantApiAdapter;
 
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -14,6 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
 import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 //import retrofit.Call;
@@ -40,9 +47,26 @@ public class ApiClient {
 
     public RestaurantApiAdapter getRestaurantApiAdapter() {
         //CreateAPI();
-
-        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET);
+        YelpOAuthConsumer consumer = new YelpOAuthConsumer(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET);
         consumer.setTokenWithSecret(AppDefines.TOKEN, AppDefines.TOKEN_SECRET);
+        consumer.generateNonce();
+        String s = "";
+
+//        try {
+//            String uuid = UUID.randomUUID().toString();
+//            consumer.sign(uuid);
+//        } catch(Exception e) {
+//            if(e.getClass().isAssignableFrom(OAuthCommunicationException.class)){
+//                s = ((OAuthCommunicationException)e).getResponseBody();
+//            } else if(e.getClass().isAssignableFrom(OAuthExpectationFailedException.class)) {
+//                s = ((OAuthExpectationFailedException)e).getMessage();
+//            } else if(e.getClass().isAssignableFrom(OAuthMessageSignerException.class)) {
+//                s = ((OAuthMessageSignerException)e).getMessage();
+//            }
+
+            Log.d("OH SHIT", s);
+//        }
+
 
         OkHttpClient client  = new OkHttpClient.Builder()
                 .addInterceptor(new SigningInterceptor(consumer))

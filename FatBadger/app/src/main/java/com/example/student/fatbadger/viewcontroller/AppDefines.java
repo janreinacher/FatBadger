@@ -6,4 +6,8 @@ public class AppDefines {
     public static final String TOKEN = "pDJ0U1bZm_IECGFL3BsvwYflqPfY-x_Z";
     public static final String TOKEN_SECRET = "_l7zJlssXnoJ-i_cAdOBnomhmIs";
     public static final String BASE_API_URL = "https://api.yelp.com/";
+    public static final String SIGNATURE_METHOD = "Hmac-SHA1";
+    public static final String SIGNATURE = "ICjluB0HBPrsIuG+jG62HtA5eO0=";
+
+    public static final String NONCE = "WKu37gqWBlR";
 }
