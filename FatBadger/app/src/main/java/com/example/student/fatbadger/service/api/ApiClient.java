@@ -1,6 +1,9 @@
 
 package com.example.student.fatbadger.service.api;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.example.student.fatbadger.viewcontroller.AppDefines;
 import com.yelp.clientlib.connection.YelpAPI;
 import com.yelp.clientlib.connection.YelpAPIFactory;
@@ -14,6 +17,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by student on 4/13/16.
@@ -21,7 +27,7 @@ import retrofit.Call;
 public class ApiClient {
 
     private static ApiClient instance;
-    private Map<String, String> params;
+    private Map<String, String> callparams;
 
     public static ApiClient getInstance() {
         if (instance == null) {
@@ -34,41 +40,49 @@ public class ApiClient {
     private YelpAPIFactory apiFactory;
     private YelpAPI yelpAPI;
 
-    /*
-    public RestaurantApiAdapter getRestaurantApiAdapter() {
-        CreateAPI();
-        RestaurantApiAdapter api = new Retrofit.Builder()
-                .baseUrl(AppDefines.BASE_API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
-                .create(RestaurantApiAdapter.class);
-
-        return api;
-    }
-    */
-
-    public void CreateAPI() {
-        params = new HashMap<>();
+    public YelpAPI CreateAPI() {
+        callparams = new HashMap<>();
         {
             // general params
-            params.put("term", "food");
-            params.put("limit", "20");
+            callparams.put("term", "food");
+            callparams.put("limit", "20");
         }
-        apiFactory = new YelpAPIFactory(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET, AppDefines.TOKEN, AppDefines.TOKEN_SECRET);
-        yelpAPI = apiFactory.createAPI();
+
+        return yelpAPI = new YelpAPIFactory(AppDefines.CONSUMER_KEY, AppDefines.CONSUMER_SECRET, AppDefines.TOKEN, AppDefines.TOKEN_SECRET).createAPI();
     }
 
     public SearchResponse getSearchResponse(String searchString) throws IOException {
 
-        Call<SearchResponse> call = yelpAPI.search(searchString, params);
-        retrofit.Response<SearchResponse> response = call.execute();
-        SearchResponse searchResponse = response.body();
+        new AsyncTask<String, String, Response<SearchResponse>>() {
 
-        return searchResponse;
+            private Response<SearchResponse> resp;
+
+
+            @Override
+            protected Response<SearchResponse> doInBackground(String... params) {
+
+                YelpAPI api = CreateAPI();
+                Call<SearchResponse> call = api.search(params[0], callparams);
+                try {
+                    resp = call.execute();
+                } catch (IOException e) {
+                    Log.d("OH SHIT", e.getMessage());
+                }
+
+                return resp;
+            }
+
+            @Override
+            protected void onPostExecute(Response<SearchResponse> searchResponseResponse) {
+                super.onPostExecute(searchResponseResponse);
+
+            }
+        }.execute(searchString);
+
+        return null;
     }
 
     public void addParam(String key, String value) {
-        params.put(key,value);
+        callparams.put(key,value);
     }
 }
