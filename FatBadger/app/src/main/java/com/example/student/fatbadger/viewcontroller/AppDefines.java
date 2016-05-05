@@ -11,3 +11,8 @@ public class AppDefines {
 
     public static final String NONCE = "WKu37gqWBlR";
 }
+
+/*
+Piece of fragment_search taken out for space purposes
+
+ */

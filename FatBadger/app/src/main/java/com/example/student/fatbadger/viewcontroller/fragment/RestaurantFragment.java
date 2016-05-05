@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +25,8 @@ public class RestaurantFragment extends Fragment {
 
     private ImageView detailThumbnail;
     private TextView detailName;
-    private ListView details;
+    private TextView phone;
+    private TextView address;
 
     public RestaurantFragment() {
 
@@ -52,18 +54,17 @@ public class RestaurantFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
         detailThumbnail = (ImageView)view.findViewById(R.id.restaurantDetailThumbnail);
         detailName = (TextView)view.findViewById(R.id.restaurantDetailName);
-        details = (ListView)view.findViewById(R.id.description);
+        phone = (TextView)view.findViewById(R.id.restaurantPhone);
+        address = (TextView)view.findViewById(R.id.restaurantAddress);
 
         Glide.with(this).load(model.getImg_url())
                 .into(detailThumbnail);
 
         detailName.setText(model.getName());
-
-        // details.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, restaurant.getDetails()));
-
+        phone.setText(model.getDisplayPhone());
+        // Code below not working, found errors in ListView earlier
+        address.setText((CharSequence) model.getDisplayAddress());
         return view;
-
-
     }
 
     @Override
