@@ -62,8 +62,7 @@ public class RestaurantFragment extends Fragment {
 
         detailName.setText(model.getName());
         phone.setText(model.getDisplayPhone());
-        // Code below not working, found errors in ListView earlier
-        address.setText((CharSequence) model.getDisplayAddress());
+        address.setText(model.getDisplayAddress());
         return view;
     }
 

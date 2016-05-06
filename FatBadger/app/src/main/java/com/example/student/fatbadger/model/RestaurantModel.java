@@ -12,7 +12,7 @@ public class
     private String id;
     private String name;
     private String display_phone;
-    private ArrayList<String> display_address;
+    private String display_address;
     private Double rating;
     private Boolean is_closed;
     private String image_url;
@@ -46,8 +46,8 @@ public class
 
     public void setRating(Double rating) { this.rating = rating; }
 
-    public ArrayList<String> getDisplayAddress() { return display_address; }
+    public String getDisplayAddress() { return display_address; }
 
-    public void setDisplayAddress(ArrayList<String> display_address) { this.display_address = display_address; }
+    public void setDisplayAddress(String display_address) { this.display_address = display_address; }
 
 }
