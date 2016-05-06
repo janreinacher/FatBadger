@@ -14,5 +14,50 @@ public class AppDefines {
 
 /*
 Piece of fragment_search taken out for space purposes
+ <GridLayout
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Space
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
 
+        <Button
+            android:id="@+id/favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Favorites"
+            android:layout_gravity="left|center_vertical"
+            android:background="#57e727" />
+
+        <Button
+            android:id="@+id/recents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Recent"
+            android:layout_gravity="center_vertical|right"
+            android:background="#57e727" />
+        <Button
+            android:id="@+id/convenience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convenience"
+            android:layout_gravity="left|center_vertical"
+            android:background="#57e727"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="10dp"
+            android:background="#57e727"
+            />
+    </GridLayout>
  */

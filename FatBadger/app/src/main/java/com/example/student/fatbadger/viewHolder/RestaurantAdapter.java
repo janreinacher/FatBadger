@@ -23,7 +23,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<BusinessViewHolder> 
 
     @Override
     public BusinessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_detail, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_item, parent, false);
 
         return new BusinessViewHolder(view);
     }
