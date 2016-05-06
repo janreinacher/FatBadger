@@ -57,13 +57,14 @@ public class RestaurantFragment extends Fragment {
         phone = (TextView)view.findViewById(R.id.restaurantPhone);
         address = (TextView)view.findViewById(R.id.restaurantAddress);
 
-        Glide.with(this).load(model.getImg_url())
+       Glide.with(this).load(model.getImg_url())
                 .into(detailThumbnail);
 
         detailName.setText(model.getName());
         phone.setText(model.getDisplayPhone());
+
         // Code below not working, found errors in ListView earlier
-        address.setText((CharSequence) model.getDisplayAddress());
+        address.setText(model.getDisplayAddress());
         return view;
     }
 

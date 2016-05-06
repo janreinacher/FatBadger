@@ -3,6 +3,7 @@ package com.example.student.fatbadger.viewcontroller.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.student.fatbadger.R;
@@ -196,6 +198,15 @@ public class SearchFragment extends Fragment {
                     restaurantRecyclerView.setLayoutManager(layoutManager);
                     restaurantRecyclerView.setAdapter(adapter);
                 }
+
+                ArrayList<RestaurantModel> models = searchResultsModel.getSearchResults();
+                RestaurantModel restaurantModel = models.get(0);
+                RestaurantFragment newRestFrag = RestaurantFragment.newInstance(restaurantModel);
+                FragmentTransaction transaction  = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, newRestFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         });
     return  view;
