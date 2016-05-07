@@ -148,13 +148,59 @@ public class ApiClient {
         res10.setImg_url("http://www.andreas-restaurant.com/images/pics/andreas_restaurant_front_entrance.jpg");
         searchResults.add(res10);
 
+        RestaurantModel res11 = new RestaurantModel();
+        res11.setName("Carlos Country Kitchen");
+        res11.setDisplayPhone("707-954-3234");
+        res11.setHours("6 AM - 4 PM");
+        res11.setDisplayAddress("153 College Avenue, Santa Rosa");
+        res11.setImg_url("https://b.zmtcdn.com/data/pictures/2/16855132/80f4f3d4e824d3f2e4292ef7af026185_featured_v2.jpg");
+        searchResults.add(res11);
+
+        RestaurantModel res12 = new RestaurantModel();
+        res12.setName("Biancini's Sandwiches");
+        res12.setDisplayPhone("707-932-4204");
+        res12.setHours("10 AM - 10 PM");
+        res12.setDisplayAddress(" 42 Mendocino Avenue, Santa Rosa");
+        res12.setImg_url("https://b.zmtcdn.com/data/pictures/9/18116349/93bfe4a6a84cdf3e9e48d5ae98e5bc95.jpg");
+        searchResults.add(res12);
+
+        RestaurantModel res13 = new RestaurantModel();
+        res13.setName("Janny's");
+        res13.setDisplayPhone("914-300-0077");
+        res13.setHours("11 AM - 8 PM");
+        res13.setDisplayAddress("321 Petaluma Hill Road, Pengrove");
+        res13.setImg_url("http://jessposhepny.com/wp-content/uploads/2015/07/image1-e1437847179508-1024x1024.jpg");
+        searchResults.add(res13);
+
+        RestaurantModel res14 = new RestaurantModel();
+        res14.setName("Five Guys Burgers");
+        res14.setDisplayPhone("282-330-5621");
+        res14.setHours("10 AM - 10PM");
+        res14.setDisplayAddress("92 Mendocino Avenue, Santa Rosa");
+        res14.setImg_url("http://www.fiveguys.com/Content/Images/first-fiveguysshop.jpg");
+        searchResults.add(res14);
+
+        RestaurantModel res15 = new RestaurantModel();
+        res15.setName("Day Drinkers");
+        res15.setDisplayPhone("1(800)tacosNbeer");
+        res15.setHours("4 AM - 9PM");
+        res15.setDisplayAddress("64 Mendocino Avenue, Santa Rosa");
+        res15.setImg_url("http://lifestyleetc.com/wp-content/uploads/2014/05/daydrinking.jpg");
+        searchResults.add(res15);
+
+
+
         model.setSearchResults(new ArrayList<RestaurantModel>());
 
         for (RestaurantModel r : searchResults) {
             if (r.getName().toLowerCase().contains(name.toLowerCase())) {
                 model.getSearchResults().add(r);
             }
-            //else if(r.get)
+            else if(r.getDisplayAddress().toLowerCase().contains(name.toLowerCase())){
+                model.getSearchResults().add(r);
+            //else if(r.getDistance() < Integer.parseInt(name))
+            //        model.getSearchResults().add(r);
+            }
         }
 
         return model;

@@ -13,7 +13,7 @@ public class
 
     private String hours;
     private String status;
-    private String convenience;
+    private int distance;
 
     private String name;
     private String display_phone;
@@ -35,6 +35,10 @@ public class
     public String getStatus() {return status;}
 
     public void setStatus(String status) {this.status = status;}
+
+    public int getDistance() {return distance;}
+
+    public void setDistance(int distance) {this.distance = distance;}
 
 
 
