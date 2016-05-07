@@ -10,6 +10,11 @@ public class
         RestaurantModel implements Serializable {
 
     private String id;
+
+    private String hours;
+    private String status;
+    private String convenience;
+
     private String name;
     private String display_phone;
     private String display_address;
@@ -21,6 +26,17 @@ public class
     public String getId() {return id;}
 
     public void setId( String id ) { this.id = id; }
+
+
+    public String getHours() {return hours; }
+
+    public void setHours(String hours) {this.hours = hours;}
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;}
+
+
 
     public String getDetails() {return details;}
 

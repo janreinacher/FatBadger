@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.student.fatbadger.R;
@@ -79,56 +80,11 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    /*
-                    ApiClient.getInstance().getRestaurantApiAdapter()
-                            .getSearchResults(
-                                    searchText.getText().toString(),
-                                    AppDefines.CONSUMER_KEY,
-                                    AppDefines.CONSUMER_SECRET,
-                                    AppDefines.TOKEN,
-                                    AppDefines.TOKEN_SECRET,
-                                    AppDefines.SIGNATURE_METHOD,
-                                    AppDefines.SIGNATURE,
-                                    getTimestamp(),
-                                    AppDefines.NONCE
 
-                                    ).subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<SearchResultsModel>() {
-                                @Override
-                                public void onCompleted() {
+                SearchResultsModel results = ApiClient.getInstance().getRestaurantByName(searchText.getText().toString());
 
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    int i = 0;
-                                }
-
-                                @Override
-                                public void onNext(SearchResultsModel searchResultsModel) {
-                                    if (searchResultsModel != null) {
-                                        adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
-                                        adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
-                                            @Override
-                                            public void onSelected(RestaurantModel item) {
-                                                if (onFragmentEvent != null) {
-                                                    onFragmentEvent.onEvent(item);
-                                                }
-                                            }
-                                        });
-                                        restaurantRecyclerView.setLayoutManager(layoutManager);
-                                        restaurantRecyclerView.setAdapter(adapter);
-                                    }
-                                }
-                            });
-                            */
-
-
-                SearchResultsModel searchResultsModel = new SearchResultsModel();
-                searchResultsModel.generateData();
-                if (searchResultsModel != null) {
-                    adapter = new RestaurantAdapter(searchResultsModel.getSearchResults());
+                if (results != null && results.getSearchResults().size() > 0) {
+                    adapter = new RestaurantAdapter(results.getSearchResults());
                     adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
                         @Override
                         public void onSelected(RestaurantModel item) {
