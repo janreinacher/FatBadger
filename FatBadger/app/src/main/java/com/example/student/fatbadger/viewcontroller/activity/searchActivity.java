@@ -1,5 +1,6 @@
 package com.example.student.fatbadger.viewcontroller.activity;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -7,7 +8,12 @@ import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
 import com.example.student.fatbadger.viewcontroller.fragment.SearchFragment;
 import com.example.student.fatbadger.viewcontroller.fragment.RestaurantFragment;
-
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 
 /**
@@ -42,4 +48,23 @@ public class SearchActivity extends AppCompatActivity {
     }
     @Override
     protected void onDestroy() {super.onDestroy();}
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            //case R.id.convenience:
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 }
