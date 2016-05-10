@@ -198,9 +198,10 @@ public class ApiClient {
             }
             else if(r.getDisplayAddress().toLowerCase().contains(name.toLowerCase())){
                 model.getSearchResults().add(r);
+            }
             //else if(r.getDistance() < Integer.parseInt(name))
             //        model.getSearchResults().add(r);
-            }
+            //}
         }
 
         return model;
