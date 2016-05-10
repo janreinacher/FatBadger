@@ -28,6 +28,7 @@ public class RestaurantFragment extends Fragment {
     private TextView phone;
     private TextView address;
     private TextView hours;
+    private TextView cost;
     //private TextView distance;
 
     public RestaurantFragment() {
@@ -59,6 +60,8 @@ public class RestaurantFragment extends Fragment {
         phone = (TextView)view.findViewById(R.id.restaurantPhone);
         address = (TextView)view.findViewById(R.id.restaurantAddress);
         hours = (TextView)view.findViewById(R.id.restaurantHours);
+        //cost = (TextView)view.findViewById(R.id.restaurantCost);
+        //status = (TextView)view.findViewById(R.id.restaurantStatus);
         //distance = (TextView)view.findViewById(R.id.restaurantDistance);
 
         Glide.with(this).load(model.getImg_url())
@@ -68,6 +71,8 @@ public class RestaurantFragment extends Fragment {
         phone.setText(model.getDisplayPhone());
         address.setText(model.getDisplayAddress());
         hours.setText(model.getHours());
+
+        //status.setText(model.getStatus());
         //distance.setText(model.getDistance());
         return view;
     }

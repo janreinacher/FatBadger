@@ -22,10 +22,12 @@ public class
     private Boolean is_closed;
     private String image_url;
     private String details;
+    private String cost;
 
     public String getId() {return id;}
 
     public void setId( String id ) { this.id = id; }
+
 
 
     public String getHours() {return hours; }
@@ -39,6 +41,10 @@ public class
     public int getDistance() {return distance;}
 
     public void setDistance(int distance) {this.distance = distance;}
+
+    public String getCost() {return cost;}
+
+    public void setCost(String cost) {this.cost = cost;}
 
 
 

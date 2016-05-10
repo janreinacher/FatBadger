@@ -37,11 +37,11 @@
         android:layout_gravity="center_vertical"
         android:singleLine="false"/>
     <TextView
-        android:id="@+id/restaurantDistance"
+        android:id="@+id/restaurantCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:singleLine="true"/>
+        android:layout_gravity="center_vertical"
+        android:singleLine="true" />
     <Button
         android:id="@+id/restaurantFavorites"
         android:layout_width="wrap_content"
