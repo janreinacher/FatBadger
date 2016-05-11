@@ -10,9 +10,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+<<<<<<< HEAD
     tools:context="com.example.student.fatbadger.viewcontroller.activity.SearchActivity"
     android:background="@drawable/fatbadger"
     >
+=======
+<<<<<<< HEAD
+    android:background="@drawable/backgroundmedium"
+    tools:context="com.example.student.fatbadger.viewcontroller.activity.searchActivity"
+    android:backgroundTintMode="src_atop">
+=======
+    tools:context="com.example.student.fatbadger.viewcontroller.activity.SearchActivity">
+>>>>>>> 88c2df005b398db767ac29ecac291197064fa7ec
+>>>>>>> 31fd0176f95bdf2a495e4915beebecb6a6c0a5b2
 
 
 

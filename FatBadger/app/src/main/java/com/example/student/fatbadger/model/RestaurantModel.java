@@ -22,6 +22,16 @@ public class
     private Boolean is_closed;
     private String image_url;
     private String details;
+    private String open;
+    private String close;
+
+    public String getClose() {return close;}
+
+    public void setClose(String close) {this.close = close;}
+
+    public String getOpen() {return open;}
+
+    public void setOpen(String open) {this.open = open;}
 
     public String getId() {return id;}
 
