@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
-        <activity android:name=".viewcontroller.activity.SearchActivity">
+        <activity android:name=".viewcontroller.activity.SearchActivity"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
