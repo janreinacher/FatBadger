@@ -7,8 +7,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme">
         <activity android:name=".viewcontroller.activity.searchActivity">
+=======
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+        <activity android:name=".viewcontroller.activity.SearchActivity">
+>>>>>>> 88c2df005b398db767ac29ecac291197064fa7ec
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

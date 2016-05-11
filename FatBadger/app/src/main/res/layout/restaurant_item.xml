@@ -15,7 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:singleLine="false"/>
+        android:textSize = "24dp"
+        android:singleLine="false"
+        android:textColor="#000000" />
     <TextView
         android:id="@+id/restaurantPhone"
         android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.student.fatbadger.viewcontroller.activity;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ public class searchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         searchFragment = SearchFragment.newInstance();
         searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
             @Override

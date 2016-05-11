@@ -14,42 +14,47 @@
         android:id="@+id/restaurantDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize = "18dp"
+        android:textSize = "24dp"
         android:textStyle = "bold"
         android:layout_gravity="center_vertical"
+        android:textColor="#000000"
         android:singleLine="false"/>
     <TextView
         android:id="@+id/restaurantPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="#000000"
         android:singleLine="true"/>
     <TextView
         android:id="@+id/restaurantAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="#000000"
         android:singleLine="false"/>
     <TextView
         android:id="@+id/restaurantHours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="#000000"
         android:singleLine="false"/>
     <TextView
         android:id="@+id/restaurantDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:textColor="#000000"
         android:singleLine="true"/>
-    <Button
+    <ToggleButton
         android:id="@+id/restaurantFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Favorite"
         android:background="#57e727" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/restaurantBlocked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
