@@ -1,9 +1,5 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">Fat Badger</string>
-=======
-    <string name="app_name">The Fat Badger</string>
->>>>>>> 88c2df005b398db767ac29ecac291197064fa7ec
     <string name="favorites">Favorites</string>
     <string name="convenience">Convenience</string>
 </resources>

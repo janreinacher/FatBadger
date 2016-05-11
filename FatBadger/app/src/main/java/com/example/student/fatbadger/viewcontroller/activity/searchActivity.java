@@ -20,7 +20,7 @@ import android.view.MenuItem;
 /**
  * Created by The Janitor on 4/5/16.
  */
-public class searchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     private SearchFragment searchFragment;
     private  RestaurantFragment restaurantFragment;
     @Override
