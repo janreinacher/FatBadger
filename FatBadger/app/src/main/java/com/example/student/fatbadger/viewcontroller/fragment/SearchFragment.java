@@ -75,8 +75,7 @@ public class SearchFragment extends Fragment {
         searchText = (EditText) view.findViewById(R.id.searchText);
         searchButton = (Button) view.findViewById(R.id.searchButton);
         restaurantRecyclerView = (RecyclerView) view.findViewById(R.id.RestaurantRecyclerView);
-        Drawable FatBadger = getResources().getDrawable(R.drawable.fatbadger);
-        FatBadger.setAlpha(50);
+
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 

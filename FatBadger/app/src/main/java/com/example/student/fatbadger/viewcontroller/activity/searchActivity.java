@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 /**
@@ -23,28 +25,39 @@ import android.view.MenuItem;
 public class SearchActivity extends AppCompatActivity {
     private SearchFragment searchFragment;
     private  RestaurantFragment restaurantFragment;
+    private Button enterButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        searchFragment = SearchFragment.newInstance();
-        searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
+        setContentView(R.layout.start_up);
+        Drawable FatBadger = getResources().getDrawable(R.drawable.fatbadger);
+        FatBadger.setAlpha(50);
+        enterButton = (Button) findViewById(R.id.startup);
+        enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onEvent(RestaurantModel restaurantModel) {
-                restaurantFragment = RestaurantFragment.newInstance(restaurantModel);
+            public void onClick(View v) {
+                setContentView(R.layout.activity_home);
+                searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
+                    @Override
+                    public void onEvent(RestaurantModel restaurantModel) {
+                        restaurantFragment = RestaurantFragment.newInstance(restaurantModel);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, restaurantFragment)
+                                .addToBackStack(RestaurantFragment.class.getSimpleName())
+                                .commit();
+                    }
+
+                });
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, restaurantFragment)
-                        .addToBackStack(RestaurantFragment.class.getSimpleName())
+                        .add(R.id.container, searchFragment)
+                        .addToBackStack(SearchFragment.class.getSimpleName())
                         .commit();
             }
-
         });
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, searchFragment)
-                .addToBackStack(SearchFragment.class.getSimpleName())
-                .commit();
     }
     @Override
     protected void onDestroy() {super.onDestroy();}
