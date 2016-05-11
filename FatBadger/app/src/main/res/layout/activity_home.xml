@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="@drawable/backgroundmedium"
-    tools:context="com.example.student.fatbadger.viewcontroller.activity.SearchActivity"
+    tools:context="com.example.student.fatbadger.viewcontroller.activity.searchActivity"
     android:backgroundTintMode="src_atop">
 
 
