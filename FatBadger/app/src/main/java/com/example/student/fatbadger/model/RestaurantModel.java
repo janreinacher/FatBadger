@@ -11,6 +11,9 @@ public class
 
     private String id;
 
+    private boolean favorite;
+    private boolean blocked;
+
     private String hours;
     private String status;
     private int distance;
@@ -24,6 +27,14 @@ public class
     private String details;
     private String open;
     private String close;
+
+    public boolean getFavorite() {return favorite;}
+
+    public void setFavorite(boolean favorite) {this.favorite = favorite;}
+
+    public boolean getBlocked() {return blocked;}
+
+    public void setBlocked(boolean blocked) {this.blocked = blocked;}
 
     public String getClose() {return close;}
 

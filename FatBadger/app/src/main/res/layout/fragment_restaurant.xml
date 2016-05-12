@@ -55,14 +55,12 @@
             android:id="@+id/restaurantFavorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favorite"
             android:background="#57e727" />
 
         <ToggleButton
             android:id="@+id/restaurantBlocked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Block"
             android:background="#e51c1f" />
     </LinearLayout>
 

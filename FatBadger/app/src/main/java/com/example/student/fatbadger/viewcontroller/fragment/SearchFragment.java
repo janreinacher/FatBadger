@@ -1,7 +1,6 @@
 package com.example.student.fatbadger.viewcontroller.fragment;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,28 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
 import com.example.student.fatbadger.model.SearchResultsModel;
-import com.example.student.fatbadger.utility.RestaurantParser;
 import com.example.student.fatbadger.viewHolder.RestaurantAdapter;
 import com.example.student.fatbadger.service.api.ApiClient;
-import com.example.student.fatbadger.viewcontroller.AppDefines;
-
-
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
-import rx.Observer;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-//import rx.Observer;
-//import rx.android.schedulers.AndroidSchedulers;
-//import rx.schedulers.Schedulers;
 
 /**
  * Created by Shay on 4/13/16.
@@ -75,8 +57,6 @@ public class SearchFragment extends Fragment {
         searchText = (EditText) view.findViewById(R.id.searchText);
         searchButton = (Button) view.findViewById(R.id.searchButton);
         restaurantRecyclerView = (RecyclerView) view.findViewById(R.id.RestaurantRecyclerView);
-
-
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +80,7 @@ public class SearchFragment extends Fragment {
                 }
             }
         });
-    return  view;
+        return  view;
     }
 
     @Override

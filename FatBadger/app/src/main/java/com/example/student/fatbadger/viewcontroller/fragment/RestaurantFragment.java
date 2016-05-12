@@ -11,9 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
@@ -28,6 +32,8 @@ public class RestaurantFragment extends Fragment {
     private TextView phone;
     private TextView address;
     private TextView hours;
+    private ToggleButton favorite;
+    private ToggleButton blocked;
     //private TextView distance;
 
     public RestaurantFragment() {
@@ -59,6 +65,44 @@ public class RestaurantFragment extends Fragment {
         phone = (TextView)view.findViewById(R.id.restaurantPhone);
         address = (TextView)view.findViewById(R.id.restaurantAddress);
         hours = (TextView)view.findViewById(R.id.restaurantHours);
+        favorite = (ToggleButton)view.findViewById(R.id.restaurantFavorites);
+        favorite.setTextOn("Unfavorite");
+        favorite.setTextOff("Favorite");
+        if (model.getFavorite())
+            favorite.setText(favorite.getTextOn());
+        else
+            favorite.setText(favorite.getTextOff());
+        favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // the toggle is enabled
+                    model.setFavorite(true);
+                } else {
+                    // the toggle is disabled
+                    model.setFavorite(false);
+                }
+            }
+        });
+        blocked = (ToggleButton)view.findViewById(R.id.restaurantBlocked);
+        blocked.setTextOn("Unblock");
+        blocked.setTextOff("Block");
+        if (model.getBlocked())
+            blocked.setText(blocked.getTextOn());
+        else
+            blocked.setText(blocked.getTextOff());
+        blocked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // the toggle is enabled
+                    model.setBlocked(true);
+                } else {
+                    // the toggle is disabled
+                    model.setBlocked(false);
+                }
+            }
+        });
         //distance = (TextView)view.findViewById(R.id.restaurantDistance);
 
         Glide.with(this).load(model.getImg_url())

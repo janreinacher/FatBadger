@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Fat Badger</string>
     <string name="favorites">Favorites</string>
-    <string name="convenience">Convenience</string>
+    <string name="blocked">Blocked</string>
 </resources>

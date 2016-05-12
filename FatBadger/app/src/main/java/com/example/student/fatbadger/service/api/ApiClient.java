@@ -38,6 +38,7 @@ public class ApiClient {
 
     private static ApiClient instance;
     private Map<String, String> params;
+    private SearchResultsModel results;
 
     public static ApiClient getInstance() {
         if (instance == null) {
@@ -57,10 +58,8 @@ public class ApiClient {
         return currentTimeStamp;
     }
 
-
-    public SearchResultsModel getRestaurantByName(String name) {
+    public ArrayList<RestaurantModel> generateData() {
         ArrayList<RestaurantModel> searchResults = new ArrayList<>();
-        SearchResultsModel model = new SearchResultsModel();
 
         RestaurantModel r1 = new RestaurantModel();
         r1.setName("McDonalds");
@@ -82,6 +81,7 @@ public class ApiClient {
         r2.setHours("6 AM - 12 AM");
         r2.setDisplayAddress("1234 east cotati\n Rohnert Park, CA 94928");
         r2.setDistance(1);
+        r2.setFavorite(true);
         searchResults.add(r2);
 
         RestaurantModel res1 = new RestaurantModel();
@@ -93,6 +93,7 @@ public class ApiClient {
         res1.setDisplayAddress("1 E Cotati Ave, Rohnert Park");
         res1.setImg_url("https://upload.wikimedia.org/wikipedia/commons/b/b8/Taco_Bell_Night.JPG");
         res1.setDistance(3);
+        res1.setBlocked(true);
         searchResults.add(res1);
 
         RestaurantModel res2 = new RestaurantModel();
@@ -148,6 +149,7 @@ public class ApiClient {
         res6.setDisplayAddress("12 Vinyard Ave, Rohnert Park");
         res6.setDistance(5);
         res6.setImg_url("http://images.teamsugar.com/files/upl1/1/17470/34_2008/art_divebar_01.preview.jpg");
+        res6.setFavorite(true);
         searchResults.add(res6);
 
         RestaurantModel res7 = new RestaurantModel();
@@ -181,6 +183,7 @@ public class ApiClient {
         res9.setDisplayAddress("315 M St, Rohnert Park");
         res9.setDistance(6);
         res9.setImg_url("http://www.thediningroom.ie/wp-content/uploads/2013/05/pacinos_restaurant_front.jpg");
+        res9.setBlocked(true);
         searchResults.add(res9);
 
         RestaurantModel res10 = new RestaurantModel();
@@ -225,6 +228,7 @@ public class ApiClient {
         res13.setDisplayAddress("321 Petaluma Hill Road, Pengrove");
         res13.setDistance(17);
         res13.setImg_url("http://jessposhepny.com/wp-content/uploads/2015/07/image1-e1437847179508-1024x1024.jpg");
+        res13.setBlocked(true);
         searchResults.add(res13);
 
         RestaurantModel res14 = new RestaurantModel();
@@ -249,7 +253,12 @@ public class ApiClient {
         res15.setImg_url("http://lifestyleetc.com/wp-content/uploads/2014/05/daydrinking.jpg");
         searchResults.add(res15);
 
+        return searchResults;
+    }
 
+    public SearchResultsModel getRestaurantByName(String name) {
+        ArrayList<RestaurantModel> searchResults = generateData();
+        SearchResultsModel model = new SearchResultsModel();
 
         model.setSearchResults(new ArrayList<RestaurantModel>());
         for (RestaurantModel r : searchResults) {
@@ -258,7 +267,7 @@ public class ApiClient {
                 model.getSearchResults().add(r);
             }
             // address matches search
-            if(r.getDisplayAddress().toLowerCase().contains(name.toLowerCase())){
+            else if(r.getDisplayAddress().toLowerCase().contains(name.toLowerCase())){
                 model.getSearchResults().add(r);
             }
 
@@ -268,25 +277,44 @@ public class ApiClient {
                 if (Integer.parseInt(r.getOpen()) < Integer.parseInt(r.getClose())) {
                     if (!(Integer.parseInt(r.getOpen()) <= Integer.parseInt(time) &&
                             Integer.parseInt(time) <= Integer.parseInt(r.getClose()))) {
-                        model.getSearchResults().remove(r);
+                        //model.getSearchResults().remove(r);
                     }
                 } else {
                     if (!(Integer.parseInt(r.getOpen()) <= Integer.parseInt(time) ||
                             Integer.parseInt(time) <= Integer.parseInt(r.getClose()))) {
-                        model.getSearchResults().remove(r);
+                        //model.getSearchResults().remove(r);
                     }
                 }
-
             }
 
             // checks if restaurant is within x miles
             Integer maxDist = 10;   // waiting for Edit text object that can hold an int value
             if (r.getDistance() > maxDist){
-                model.getSearchResults().remove(r);
+                //model.getSearchResults().remove(r);
             }
-
         }
+        return model;
+    }
 
+    public SearchResultsModel getFavoriteRestaurants() {
+        ArrayList<RestaurantModel> searchResults = new ArrayList<>();
+        SearchResultsModel model = new SearchResultsModel();
+        for (RestaurantModel r: searchResults) {
+            // only display favorites
+            if(r.getFavorite())
+                model.getSearchResults().add(r);
+        }
+        return model;
+    }
+
+    public SearchResultsModel getBlockedRestaurants() {
+        ArrayList<RestaurantModel> searchResults = new ArrayList<>();
+        SearchResultsModel model = new SearchResultsModel();
+        for (RestaurantModel r: searchResults) {
+            // only display blocked
+            if(r.getBlocked())
+                model.getSearchResults().add(r);
+        }
         return model;
     }
 
