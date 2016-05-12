@@ -29,16 +29,12 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_up);
+
+        setContentView(R.layout.activity_home);
         Drawable FatBadger = getResources().getDrawable(R.drawable.fatbadger);
         FatBadger.setAlpha(50);
-        enterButton = (Button) findViewById(R.id.startup);
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.activity_home);
-                searchFragment = SearchFragment.newInstance();
-                searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
+        searchFragment = SearchFragment.newInstance();
+        searchFragment.setOnFragmentEvent(new SearchFragment.OnFragmentEvent() {
                     @Override
                     public void onEvent(RestaurantModel restaurantModel) {
                         restaurantFragment = RestaurantFragment.newInstance(restaurantModel);
@@ -51,14 +47,12 @@ public class SearchActivity extends AppCompatActivity {
 
                 });
 
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, searchFragment)
-                        .addToBackStack(SearchFragment.class.getSimpleName())
-                        .commit();
-            }
-        });
-
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, searchFragment)
+                .addToBackStack(SearchFragment.class.getSimpleName())
+                .commit();
     }
+
     @Override
     protected void onDestroy() {super.onDestroy();}
 
