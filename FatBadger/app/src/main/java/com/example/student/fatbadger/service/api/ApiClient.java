@@ -253,7 +253,7 @@ public class ApiClient {
         res15.setImg_url("http://lifestyleetc.com/wp-content/uploads/2014/05/daydrinking.jpg");
         searchResults.add(res15);
 
-        return searchResults;
+       return searchResults;
     }
 
     public SearchResultsModel getRestaurantByName(String name) {
@@ -297,7 +297,7 @@ public class ApiClient {
     }
 
     public SearchResultsModel getFavoriteRestaurants() {
-        ArrayList<RestaurantModel> searchResults = new ArrayList<>();
+        ArrayList<RestaurantModel> searchResults = generateData();
         SearchResultsModel model = new SearchResultsModel();
         for (RestaurantModel r: searchResults) {
             // only display favorites
@@ -308,7 +308,7 @@ public class ApiClient {
     }
 
     public SearchResultsModel getBlockedRestaurants() {
-        ArrayList<RestaurantModel> searchResults = new ArrayList<>();
+        ArrayList<RestaurantModel> searchResults = generateData();
         SearchResultsModel model = new SearchResultsModel();
         for (RestaurantModel r: searchResults) {
             // only display blocked

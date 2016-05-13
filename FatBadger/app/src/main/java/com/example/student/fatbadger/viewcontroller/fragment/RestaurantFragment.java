@@ -21,6 +21,7 @@ import android.widget.ToggleButton;
 import com.bumptech.glide.Glide;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
+import com.example.student.fatbadger.service.api.ApiClient;
 
 
 public class RestaurantFragment extends Fragment {

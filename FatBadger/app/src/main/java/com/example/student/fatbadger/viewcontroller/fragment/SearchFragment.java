@@ -70,6 +70,8 @@ public class SearchFragment extends Fragment {
                     adapter.setOnItemSelected(new RestaurantAdapter.OnItemSelected() {
                         @Override
                         public void onSelected(RestaurantModel item) {
+                            boolean isFavorite = item.getFavorite();
+                            boolean isBlocked = item.getBlocked();
                             if (onFragmentEvent != null) {
                                 onFragmentEvent.onEvent(item);
                             }
