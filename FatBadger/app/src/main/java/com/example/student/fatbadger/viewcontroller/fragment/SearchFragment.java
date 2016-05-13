@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int dist = 1;
+                int dist = 0;
                 if (maxDist.getText().toString() != "") {
                     dist = Integer.parseInt(maxDist.getText().toString());
                 }

@@ -287,10 +287,11 @@ public class ApiClient {
                     }
                 }
 
-
-                // checks if restaurant is within x miles
-                if (r.getDistance() > maxDist){
-                    model.getSearchResults().remove(r);
+                if (maxDist != 0) {
+                    // checks if restaurant is within x miles
+                    if (r.getDistance() > maxDist) {
+                        model.getSearchResults().remove(r);
+                    }
                 }
             }
         }
