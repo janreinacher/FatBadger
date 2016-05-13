@@ -10,25 +10,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-<<<<<<< Updated upstream
+
     tools:context="com.example.student.fatbadger.viewcontroller.activity.SearchActivity"
     android:background="@drawable/backgroundlarge"
     android:backgroundTint="#1c7805"
     android:backgroundTintMode="screen">
-=======
-    tools:context="com.example.student.fatbadger.viewcontroller.activity.SearchActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/startup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Click to enter into The Fat Badger!"/>
-    </LinearLayout>
->>>>>>> Stashed changes
 
 </RelativeLayout>

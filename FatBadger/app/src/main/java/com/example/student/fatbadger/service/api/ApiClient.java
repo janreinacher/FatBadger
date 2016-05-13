@@ -59,6 +59,7 @@ public class ApiClient {
     }
 
     public ArrayList<RestaurantModel> generateData() {
+
         ArrayList<RestaurantModel> searchResults = new ArrayList<>();
 
         RestaurantModel r1 = new RestaurantModel();
@@ -256,7 +257,7 @@ public class ApiClient {
         return searchResults;
     }
 
-    public SearchResultsModel getRestaurantByName(String name) {
+    public SearchResultsModel getRestaurantByName(String name, boolean conv, int maxDist) {
         ArrayList<RestaurantModel> searchResults = generateData();
         SearchResultsModel model = new SearchResultsModel();
 
@@ -273,7 +274,7 @@ public class ApiClient {
 
             String time = getTimestamp();
             // Checks if restaurant is open
-            if (true) { // want shays toggle for this
+            if (conv) {
                 if (Integer.parseInt(r.getOpen()) < Integer.parseInt(r.getClose())) {
                     if (!(Integer.parseInt(r.getOpen()) <= Integer.parseInt(time) &&
                             Integer.parseInt(time) <= Integer.parseInt(r.getClose()))) {
@@ -285,16 +286,17 @@ public class ApiClient {
                         //model.getSearchResults().remove(r);
                     }
                 }
-            }
 
-            // checks if restaurant is within x miles
-            Integer maxDist = 10;   // waiting for Edit text object that can hold an int value
-            if (r.getDistance() > maxDist){
-                //model.getSearchResults().remove(r);
+
+                // checks if restaurant is within x miles
+                if (r.getDistance() > maxDist){
+                    model.getSearchResults().remove(r);
+                }
             }
         }
         return model;
     }
+
 
     public SearchResultsModel getFavoriteRestaurants() {
         ArrayList<RestaurantModel> searchResults = new ArrayList<>();

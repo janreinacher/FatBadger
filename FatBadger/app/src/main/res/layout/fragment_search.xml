@@ -28,6 +28,21 @@
             android:text="Search"/>
     </LinearLayout>
 
+    <EditText
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/maxDist"
+        android:text="5" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Convenience"
+        android:id="@+id/convenience"
+        android:checked="false" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RestaurantRecyclerView"
         android:layout_width="match_parent"
