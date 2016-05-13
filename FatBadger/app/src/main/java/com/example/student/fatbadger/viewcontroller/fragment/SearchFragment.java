@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+
+import java.io.IOException;
 import java.sql.Timestamp;
 import com.example.student.fatbadger.R;
 import com.example.student.fatbadger.model.RestaurantModel;
@@ -24,6 +27,8 @@ public class SearchFragment extends Fragment {
     private EditText searchText;
     private Button searchButton;
     private RecyclerView restaurantRecyclerView;
+    private CheckBox conv;
+    private EditText maxDist;
     private RestaurantAdapter adapter;
     private LinearLayoutManager layoutManager;
     private OnFragmentEvent onFragmentEvent;
@@ -56,14 +61,23 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         searchText = (EditText) view.findViewById(R.id.searchText);
         searchButton = (Button) view.findViewById(R.id.searchButton);
+        conv = (CheckBox) view.findViewById(R.id.convenience);
+        maxDist = (EditText) view.findViewById(R.id.maxDist);
         restaurantRecyclerView = (RecyclerView) view.findViewById(R.id.RestaurantRecyclerView);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int dist = 1;
+                if (maxDist.getText().toString() != "") {
+                    dist = Integer.parseInt(maxDist.getText().toString());
+                }
+                SearchResultsModel results = ApiClient.getInstance().getRestaurantByName(
+                        searchText.getText().toString(),
+                        conv.isChecked(),
+                        dist);
 
-                SearchResultsModel results = ApiClient.getInstance().getRestaurantByName(searchText.getText().toString());
 
                 if (results != null && results.getSearchResults().size() > 0) {
                     adapter = new RestaurantAdapter(results.getSearchResults());
